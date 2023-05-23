@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../Components/Header';
-import { Container, Main, TablePlayers, TableTeams, Wrapper } from './styles';
-import { useNavigate } from 'react-router';
+import { CardStatistics, Container, Main, TablePlayers, TablePlayersContainer, TableStatistics, TableTeams, Wrapper } from './styles';
+// import { useNavigate } from 'react-router';
 import { getPlayers, getTeams, getTeamsParameters, getTeamsStatistics } from '../../Store/Teams/Teams.selectors';
 import Button from '../../Components/Button';
 import Modal from '../../Components/Modal';
@@ -12,7 +12,7 @@ import { IPlayersResponse } from '../../Data/interface/Teams/IPlayers';
 
 function Teams() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const teams = useSelector(getTeams);
   const teamsStatistics = useSelector(getTeamsStatistics);
   const teamsParameters = useSelector(getTeamsParameters);
@@ -45,6 +45,7 @@ function Teams() {
       teamId: teamId,
     }));
   }
+  console.log(activeTeamsStatistics)
 
   const handleOpenInfo = (team: ITeamsStatisticsResponse, players: IPlayersResponse[]) => {
     setTeamsStatistics(team);
@@ -111,41 +112,88 @@ function Teams() {
           onCancel={() => handleCloseInfo()}
           confirmLabel="Listar Jogadores"
           onConfirm={() => undefined}
+          maxWidth="500px"
         >
-          <div>
-            <span>Formação mais utilizada: </span>
-            <span>
-              {activeTeamsStatistics?.lineups.reduce((acc, curr) => {
-              if (acc.played > curr.played) return acc;
-              else return acc = curr;
-              }, {} as ILineup).formation}
-            </span>
-          </div>
+          <CardStatistics>
+            <div className="containerSeparate">
+              <div className="separate">
+                <span>Jogos: </span>
+                <span>{activeTeamsStatistics.fixtures.played.total}</span>
+              </div>
+              <div className="separate">
+                <span>Vitórias: </span>
+                <span>{activeTeamsStatistics.fixtures.wins.total}</span>
+              </div>
+            </div>
+            <div className="containerSeparate">
+              <div className="separate">
+                <span>Derrotas: </span>
+                <span>{activeTeamsStatistics.fixtures.loses.total}</span>
+              </div>
+              <div className="separate">
+                <span>Empates: </span>
+                <span>{activeTeamsStatistics.fixtures.draws.total}</span>
+              </div>
+            </div>
+            <div>
+              <span className="goalsTitle"> - Gols por tempo de jogo - </span>
+              <div>
+                <TableStatistics>
+                  <thead>
+                    <tr>
+                      {Object.entries(activeTeamsStatistics.goals.for.minute).map(([key, value]) => (
+                        <th>{key}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {Object.entries(activeTeamsStatistics.goals.for.minute).map(([key, value]) => (
+                        <td>{value.total}</td>
+                      ))}
+                    </tr>
+                  </tbody>
+                </TableStatistics>
+              </div>
+            </div>
+            <div>
+              <span>Formação mais utilizada: </span>
+              <span>
+                {activeTeamsStatistics?.lineups.reduce((acc, curr) => {
+                if (acc.played > curr.played) return acc;
+                else return acc = curr;
+                }, {} as ILineup).formation}
+              </span>
+            </div>
+          </CardStatistics>
 
 
-          <TablePlayers>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Idade</th>
-                <th>Nascionalidade</th>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {activePlayers?.map((player, i) => (
-                <tr key={`${player.player.id}-${i}`}>
-                  <td>{player.player.name}</td>
-                  <td>{player.player.age}</td>
-                  <td>{player.player.nationality}</td>
-                  <td>
-                    <img src={player.player.photo} alt="" />
-                  </td>
+          <TablePlayersContainer>
+            <TablePlayers>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th className="w28">Idade</th>
+                  <th>Nascionalidade</th>
                 </tr>
-              ))}
-            </tbody>
-          </TablePlayers>
+              </thead>
+
+              <tbody>
+                {activePlayers?.map((player, i) => (
+                  <tr key={`${player.player.id}-${i}`}>
+                    <td>
+                      <span>
+                        <img src={player.player.photo} alt="" />
+                        {player.player.name}
+                      </span>
+                    </td>
+                    <td className="w28">{player.player.age}</td>
+                    <td>{player.player.nationality}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </TablePlayers>
+          </TablePlayersContainer>
         </Modal>
       )}
     </Wrapper>

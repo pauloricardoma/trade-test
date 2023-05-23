@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StyledSpinner } from './styles';
 
 interface ISpinner {

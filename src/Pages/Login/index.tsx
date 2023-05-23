@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, getIsLogged } from '../../Store/Auth/Auth.selectors';
+import { getAuth } from '../../Store/Auth/Auth.selectors';
 import { ILoginRequest } from '../../Data/interface/Auth/ILoginRequest';
 import { AuthActions } from '../../Store/Auth/Auth.action';
 import Header from '../../Components/Header';

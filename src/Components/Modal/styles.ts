@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 interface IContainer {
-  danger: boolean;
+  danger?: boolean;
+  maxWidth?: string;
 }
 
 export const Overlay = styled.div`
@@ -19,7 +20,7 @@ export const Overlay = styled.div`
 
 export const Container = styled.div<IContainer>`
   width: 100%;
-  max-width: 450px;
+  max-width:  ${({ maxWidth }) => maxWidth ? maxWidth : '450px'};
   background: ${({ theme }) => theme.background};
   border-radius: 4px;
   padding: 24px;

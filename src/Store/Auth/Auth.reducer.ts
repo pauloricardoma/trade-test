@@ -5,7 +5,7 @@ import { AuthUtils, ILoggedUser } from './AuthUtils';
 import { IAuthState } from './interface/IAuthState';
 
 const apikey = localStorage.getItem(TRADE_API_KEY) || undefined;
-console.log(apikey)
+
 let newState: IAuthState;
 let validApikey: string;
 let persistAuth: ILoggedUser;

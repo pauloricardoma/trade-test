@@ -2,9 +2,11 @@ import { ThemeKeys, ThemeUnion } from './Theme.action';
 import light from '../../Assets/styles/themes/light';
 import { IThemeState } from './interface/IThemeState';
 
+const themeString = localStorage.getItem('theme') || 'light';
+
 const initialState: IThemeState = {
   theme: light,
-  themeString: JSON.parse(localStorage.getItem('theme') || '') || 'light',
+  themeString: themeString,
 };
 
 const themeReducer = (state = initialState, action: ThemeUnion): IThemeState => {

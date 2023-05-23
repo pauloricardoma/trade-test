@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import ReactPortal from '../ReactPortal';
 import Button from '../Button';
@@ -14,6 +14,7 @@ interface IModal {
   confirmLabel?: string;
   onCancel: () => void;
   onConfirm: () => void;
+  maxWidth?: string;
 }
 
 function Modal({
@@ -26,6 +27,7 @@ function Modal({
   confirmLabel,
   onCancel,
   onConfirm,
+  maxWidth,
 }: IModal) {
   if (!visible) {
     return null;
@@ -34,7 +36,10 @@ function Modal({
   return (
     <ReactPortal containerId="modal-root">
       <Overlay>
-        <Container danger={danger || false}>
+        <Container
+          danger={danger ? true : undefined}
+          maxWidth={maxWidth}
+        >
           <h1>{title}</h1>
 
           <div className="modal-body">
