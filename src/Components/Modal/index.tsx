@@ -13,7 +13,7 @@ interface IModal {
   cancelLabel?: string;
   confirmLabel?: string;
   onCancel: () => void;
-  onConfirm: () => void;
+  onConfirm?: () => void;
   maxWidth?: string;
 }
 
@@ -55,12 +55,14 @@ function Modal({
             >
               {cancelLabel}
             </button>
-            <Button
-              type="button"
-              onClick={onConfirm}
-            >
-              {confirmLabel}
-            </Button>
+            {onConfirm && (
+              <Button
+                type="button"
+                onClick={onConfirm}
+              >
+                {confirmLabel}
+              </Button>
+            )}
           </Footer>
         </Container>
       </Overlay>

@@ -111,7 +111,6 @@ function Teams() {
           cancelLabel="Voltar"
           onCancel={() => handleCloseInfo()}
           confirmLabel="Listar Jogadores"
-          onConfirm={() => undefined}
           maxWidth="500px"
         >
           <CardStatistics>
@@ -142,14 +141,14 @@ function Teams() {
                   <thead>
                     <tr>
                       {Object.entries(activeTeamsStatistics.goals.for.minute).map(([key, value]) => (
-                        <th>{key}</th>
+                        <th key={`${key}-${value.total}`}>{key}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       {Object.entries(activeTeamsStatistics.goals.for.minute).map(([key, value]) => (
-                        <td>{value.total}</td>
+                        <td key={`${value.total}-${key}`}>{value.total}</td>
                       ))}
                     </tr>
                   </tbody>

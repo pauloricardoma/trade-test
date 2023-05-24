@@ -1,0 +1,12 @@
+# Arquivos e pastas específicos do Vite
+node_modules
+dist
+
+# Arquivos e pastas do controle de versão
+.git
+.gitignore
+
+# Outros arquivos e pastas que você deseja excluir
+.env
+logs
+tmp
