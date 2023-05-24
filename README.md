@@ -4,6 +4,8 @@
 
 O frontend foi desenvolvido com React.Js, e iniciado com Vite, Typescript, redux, redux-saga, axios, router-dom, styled-components, hook-form, yup. De acordo como foi pedido, foi dockerizada a aplicação.
 
+Faltaram alguns detalhes na aplicação, como loading, skeleton e uma melhor estilização e cores. Faltam de tempo também, me desculpem. E obrigado pelo desafio, tive uns insights durante o projeto.
+
 ### Pré-requisitos:
 
 Tenha instalado em sua máquina as seguintes ferramentas:
