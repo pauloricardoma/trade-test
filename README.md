@@ -13,7 +13,7 @@ Docker / docker-compose / Node.js
 
 ### Rodando a aplicação
 
-2. Tenha certeza das portas não estarem sendo usadar:
+2. Tenha certeza das portas não estarem sendo usadas:
 - frontend rodando em: http://localhost:8000
 
 3. Entre no projeto e execute o docker-compose
